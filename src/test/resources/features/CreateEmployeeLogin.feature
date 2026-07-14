@@ -13,36 +13,6 @@ Background:
     When the admin enters the userRole as "ESS", employee name as "test", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
     And user clicks save button
     Then the user login details are created successfully
-#
-#  @create_employee_login @invalid
-#  Scenario: User Role left unselected
-#    When the admin enters the userRole as "-- Select --", employee name as "test", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
-#    And user clicks save button
-#    Then the error message "Required" is shown beside "user role" field
-#
-#  @create_employee_login @invalid
-#  Scenario: Status left unselected
-#    When the admin enters the userRole as "ESS", employee name as "test", status as "-- Select --", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
-#    And user clicks save button
-#    Then the error message "Required" is shown beside "status" field
-#
-#  @create_employee_login @invalid
-#  Scenario: Employee Name left empty
-#    When the admin enters the userRole as "ESS", employee name as "", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
-#    And user clicks save button
-#    Then the error message "Required" is shown beside "employee name" field
-#
-#  @create_employee_login @invalid
-#  Scenario: User Name left empty
-#    When the admin enters the userRole as "ESS", employee name as "test", status as "Enabled", username as "",password as "Testpass@123" and confirm password as "Testpass@123"
-#    And user clicks save button
-#    Then the error message "Required" is shown beside "user name" field
-#
-#  @create_employee_login @invalid
-#  Scenario: Password left empty
-#    When the admin enters the userRole as "ESS", employee name as "test", status as "Enabled", username as "testUser",password as "" and confirm password as "Testpass@123"
-#    And user clicks save button
-#    Then the error message "Required" is shown beside "password" field
 
   @create_employee_login @invalid1
   Scenario Outline: Save fails when a required field is left empty
