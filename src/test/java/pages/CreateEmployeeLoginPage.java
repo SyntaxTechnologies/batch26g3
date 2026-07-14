@@ -57,6 +57,9 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "//label[text()='Password']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
     public WebElement passwordErrorLoc;
 
+    @FindBy(xpath = "//label[text()='Password']/ancestor::div[contains(@class,'user-password-cell')]/span[contains(@class,'oxd-chip')]")
+    public WebElement passwordStrengthErrorLoc;
+
     @FindBy(xpath = "//label[text()='Confirm Password']/following::input[1]")
     public WebElement confirmPassword;
 

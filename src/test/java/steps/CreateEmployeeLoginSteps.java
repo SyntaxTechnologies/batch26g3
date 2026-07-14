@@ -62,15 +62,23 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
     @Then("the error message {string} is shown beside {string} field")
     public void the_error_message_is_shown_beside_field(String message, String fieldName) {
         WebElement element = null;
+
         switch(fieldName) {
             case "user role":element=createEmployeeLoginPage.userRoleErrorLoc;break;
             case "status":element=createEmployeeLoginPage.statusErrorLoc;break;
             case "employee name":element=createEmployeeLoginPage.employeeNameErrorLoc;break;
             case "user name":element=createEmployeeLoginPage.userNameErrorLoc;break;
             case "password":element=createEmployeeLoginPage.passwordErrorLoc;break;
+            case "password strength":element=createEmployeeLoginPage.passwordStrengthErrorLoc;break;
             case "confirm password":element=createEmployeeLoginPage.confirmPasswordErrorLoc;break;
         }
+
         Assert.assertTrue(element.isDisplayed());
+
+        if(fieldName.equals("password strength")){
+            waitForTextToBeExpectedTest(element,message);
+        }
+
         Assert.assertEquals(message,element.getText());
     }
 
@@ -82,7 +90,7 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
 
     @When("the user enters the  password as {string}")
     public void the_user_enters_the_password_as(String password) {
+        System.out.println(password);
         sendText(password, createEmployeeLoginPage.password);
     }
-
 }

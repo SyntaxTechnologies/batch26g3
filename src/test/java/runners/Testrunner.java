@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features="src/test/resources/features/",
         glue="steps",
         dryRun=false,
-        tags ="@negative1"
+        tags ="@create_employee_login"
 )
 public class Testrunner {
 }

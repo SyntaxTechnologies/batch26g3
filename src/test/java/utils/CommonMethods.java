@@ -95,6 +95,10 @@ public class CommonMethods extends pageInitialiser{
         return element;
     }
 
+    public void waitForTextToBeExpectedTest(WebElement element,String expectedText){
+        getwait().until(driver -> element.getText().trim().equalsIgnoreCase(expectedText));
+    }
+
     public void waitForUrl(String url){
         getwait().until(ExpectedConditions.urlContains(url));
     }
@@ -114,7 +118,6 @@ public class CommonMethods extends pageInitialiser{
             }
         }
     }
-
  }
 
 
