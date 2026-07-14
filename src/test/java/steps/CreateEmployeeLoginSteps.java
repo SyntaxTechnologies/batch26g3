@@ -92,7 +92,6 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
 
     @When("the user enters the  password as {string}")
     public void the_user_enters_the_password_as(String password) {
-        System.out.println(password);
         sendText(password, createEmployeeLoginPage.password);
     }
 

@@ -6,7 +6,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -55,9 +54,9 @@ public class CommonMethods extends pageInitialiser{
         }
     }
 
-    public void sendText(String username, WebElement element){
-            element.clear();
-            element.sendKeys(username);
+    public void sendText(String text, WebElement element){
+        element.clear();
+        element.sendKeys(text);
     }
 
     public WebDriverWait getwait(){
@@ -70,9 +69,7 @@ public class CommonMethods extends pageInitialiser{
     }
 
     public void click(WebElement element){
-
-            waitForElementToBeClickAble(element);
-
+        waitForElementToBeClickAble(element);
         element.click();
     }
 
@@ -87,7 +84,7 @@ public class CommonMethods extends pageInitialiser{
         element.click();
     }
 
-    public WebElement waitForOptionReadyAndClickable(WebElement element) {
+    public void waitForOptionReadyAndClickable(WebElement element) {
         getwait().until(driver -> {
             try {
                 String text = element.getText().trim();
@@ -98,7 +95,6 @@ public class CommonMethods extends pageInitialiser{
                 return false;
             }
         });
-        return element;
     }
 
     public void waitForTextToBeExpectedTest(WebElement element,String expectedText){

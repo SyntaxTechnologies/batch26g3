@@ -16,7 +16,7 @@ Background:
     And the created user is linked to employee "TestUserSetup Demo"
 
   @create_employee_login @negative
-  Scenario Outline: Save fails when a required field is left empty
+  Scenario Outline: Save fails when a required field is left empty for <field>
     When the admin enters the userRole as "<userRole>", employee name as "<employeeName>", status as "<status>", username as "<username>",password as "<password>" and confirm password as "<confirmPassword>"
     And user clicks save button
     Then the error message "Required" is shown beside "<field>" field
@@ -35,7 +35,7 @@ Background:
     Then the error message "Passwords do not match" is shown beside "confirm password" field
 
   @create_employee_login  @negative
-    Scenario Outline: Testing password rules
+    Scenario Outline: Testing password rules for <error>
     When the user enters the  password as "<password_text>"
     And user clicks save button
     Then the error message "<error>" is shown beside "password" field
@@ -47,7 +47,7 @@ Background:
       | Passwordtest123 | Your password must contain minimum 1 special character  |
 
   @create_employee_login  @ui
-  Scenario Outline: Testing password strength
+  Scenario Outline: Testing password strength for <strength>
     When the user enters the  password as "<password_text>"
     Then the error message "<strength>" is shown beside "password strength" field
     Examples:
