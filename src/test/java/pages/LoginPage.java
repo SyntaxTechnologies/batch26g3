@@ -22,4 +22,9 @@ public class LoginPage extends CommonMethods {
     @FindBy(xpath="//h6[text()='Dashboard']")
     public WebElement dashboardText;
 
+    @FindBy(xpath = "//p[text()='Invalid credentials']")
+    public WebElement errorPasswordText;
+
+    @FindBy(xpath="//span[text()='Required']")
+    public WebElement requiredText;
 }
