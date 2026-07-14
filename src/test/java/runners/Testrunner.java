@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
         features="src/test/resources/features/",
         glue="steps",
         dryRun=false,
-        tags ="@create_employee_login"
+        plugin = {"pretty",
+                "html:target/cucumber.html",
+                "json:target/jsonReports/cucumber.json"}
 )
 public class Testrunner {
 }
