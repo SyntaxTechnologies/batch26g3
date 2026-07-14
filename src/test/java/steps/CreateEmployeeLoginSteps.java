@@ -9,6 +9,7 @@ import utils.ConfigReader;
 
 
 public class CreateEmployeeLoginSteps extends CommonMethods {
+  static String createdUserName;
 
     @When("admin clicks the Admin option")
     public void admin_clicks_the_admin_option() {
@@ -38,8 +39,10 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         click(createEmployeeLoginPage.status);
         selectDropdownOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
 
+        createdUserName= userName + generateRandomNumber();
+
         if(!userName.isBlank()) {
-            sendText(userName + generateRandomNumber(), createEmployeeLoginPage.userName);
+            sendText(createdUserName, createEmployeeLoginPage.userName);
         }
 
         sendText(password, createEmployeeLoginPage.password);
@@ -55,7 +58,6 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
     public void the_user_login_details_are_created_successfully() {
         String viewSystemUsersUrl = ConfigReader.read("viewSystemUsersUrl");
         waitForUrl(viewSystemUsersUrl);
-        System.out.println(viewSystemUsersUrl);
         Assert.assertTrue(driver.getCurrentUrl().contains(viewSystemUsersUrl));
     }
 
@@ -93,4 +95,14 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         System.out.println(password);
         sendText(password, createEmployeeLoginPage.password);
     }
+
+    @Then("the created user is linked to employee {string}")
+    public void the_created_user_is_linked_to_employee(String employeeName) throws InterruptedException {
+        sendText(createdUserName, createEmployeeLoginPage.visitUsername);
+        click(createEmployeeLoginPage.searchButton);
+
+        Assert.assertEquals(createdUserName, createEmployeeLoginPage.foundUserName.getText());
+        Assert.assertEquals(employeeName, createEmployeeLoginPage.foundEmployeeName.getText());
+    }
+
 }

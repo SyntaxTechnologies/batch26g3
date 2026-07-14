@@ -69,6 +69,18 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "//button[text()=' Save ']")
     public WebElement saveButton;
 
+    @FindBy(xpath = "//label[text()='Username']//ancestor::div[contains(@class,'oxd-input-group')]//input")
+    public WebElement visitUsername;
+
+    @FindBy(xpath = "//button[text()=' Search ']")
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//div[contains(@class,'oxd-table-body')]//div[contains(@class,'oxd-padding-cell')][2]")
+    public WebElement foundUserName;
+
+    @FindBy(xpath = "//div[contains(@class,'oxd-table-body')]//div[contains(@class,'oxd-padding-cell')][4]")
+    public WebElement foundEmployeeName;
+
     public CreateEmployeeLoginPage() {
         PageFactory.initElements(driver,this);
     }

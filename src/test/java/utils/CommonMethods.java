@@ -65,7 +65,6 @@ public class CommonMethods extends pageInitialiser{
         return  wait;
     }
 
-
     public void waitForElementToBeClickAble(WebElement element){
         getwait().until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -142,7 +141,6 @@ public class CommonMethods extends pageInitialiser{
         }
         return picByte;
     }
-
 
     public String getTimeStamp(String pattern){
 

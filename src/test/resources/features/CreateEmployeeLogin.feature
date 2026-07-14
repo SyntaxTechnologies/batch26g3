@@ -10,16 +10,16 @@ Background:
 
   @create_employee_login @positive
   Scenario: creating employee login details
-    When the admin enters the userRole as "ESS", employee name as "test", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
+    When the admin enters the userRole as "ESS", employee name as "TestUserSetup Demo", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
     And user clicks save button
     Then the user login details are created successfully
+    And the created user is linked to employee "TestUserSetup Demo"
 
   @create_employee_login @negative
   Scenario Outline: Save fails when a required field is left empty
     When the admin enters the userRole as "<userRole>", employee name as "<employeeName>", status as "<status>", username as "<username>",password as "<password>" and confirm password as "<confirmPassword>"
     And user clicks save button
     Then the error message "Required" is shown beside "<field>" field
-
     Examples:
       | userRole    | employeeName | status     | username  | password     | confirmPassword | field         |
       | -- Select --| test         | Enabled    | testUser  | Testpass@123 | Testpass@123     | user role     |
