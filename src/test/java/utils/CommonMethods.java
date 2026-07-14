@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class CommonMethods extends pageInitialiser{
 
@@ -101,6 +102,17 @@ public class CommonMethods extends pageInitialiser{
     // Generates random number between 1 and 100
     public int generateRandomNumber() {
         return (int) (Math.random() * 100) + 1;
+    }
+
+    public void selectDropdownOptionByText(List<WebElement> options, String optionToSelect)
+    {
+        List<WebElement> elements = options;
+        for(var element : elements){
+            if(element.getText().equals(optionToSelect)){
+                click(element);
+                break;
+            }
+        }
     }
 
  }

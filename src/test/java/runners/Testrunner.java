@@ -9,9 +9,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features="src/test/resources/features/",
         glue="steps",
-        dryRun=false
-
-
+        dryRun=false,
+        tags ="@negative1"
 )
 public class Testrunner {
 }

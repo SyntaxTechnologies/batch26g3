@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.CommonMethods;
 
+import java.util.List;
+
 public class CreateEmployeeLoginPage extends CommonMethods {
 
     @FindBy(xpath = "//a/span[text()='Admin']")
@@ -19,8 +21,11 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "//label[text()='User Role']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
      public WebElement userRole;
 
-    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']/span[text()='ESS']")
-    public WebElement essUserOption;
+    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']")
+    public List<WebElement> userRoleOptions;
+
+    @FindBy(xpath = "//label[text()='User Role']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement userRoleErrorLoc;
 
     @FindBy(xpath = "//label[text()='Employee Name']/ancestor::div[contains(@class,'oxd-input-group')]//input")
     public WebElement employeeName;
@@ -28,29 +33,38 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "(//div[contains(@class,'oxd-autocomplete-dropdown')]//div[@role='option'])[1]")
     public WebElement employeeNameOption;
 
+    @FindBy(xpath = "//label[text()='Employee Name']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement employeeNameErrorLoc;
+
     @FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
     public WebElement status;
 
-    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']/span[text()='Enabled']")
-    public WebElement enabledStatusOption;
+    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']")
+    public List<WebElement> enabledStatusOptions;
+
+    @FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement statusErrorLoc;
 
     @FindBy(xpath = "//label[text()='Username']/following::input[1]")
     public WebElement userName;
 
+    @FindBy(xpath = "//label[text()='Username']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement userNameErrorLoc;
+
     @FindBy(xpath = "//label[text()='Password']/following::input[1]")
     public WebElement password;
+
+    @FindBy(xpath = "//label[text()='Password']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement passwordErrorLoc;
 
     @FindBy(xpath = "//label[text()='Confirm Password']/following::input[1]")
     public WebElement confirmPassword;
 
+    @FindBy(xpath = "//label[text()='Confirm Password']/ancestor::div[contains(@class,'oxd-input-group')]//span[contains(@class,'oxd-input-field-error-message')]")
+    public WebElement confirmPasswordErrorLoc;
+
     @FindBy(xpath = "//button[text()=' Save ']")
     public WebElement saveButton;
-
-    @FindBy(xpath = "//label[text()='Username']//following::input[1]")
-    public WebElement visitUsersUserName;
-
-    @FindBy(xpath = "//button[text()=' Search ']")
-    public WebElement searchButton;
 
     public CreateEmployeeLoginPage() {
         PageFactory.initElements(driver,this);

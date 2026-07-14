@@ -3,8 +3,10 @@ package steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
 import utils.ConfigReader;
+
 
 public class CreateEmployeeLoginSteps extends CommonMethods {
 
@@ -23,25 +25,27 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         click(createEmployeeLoginPage.addButton);
     }
 
-    @When("the admin enters the userRole as {string}, employee name as {string}, status as {string}, username,password and confirm password")
-    public void the_admin_enters_the_user_role_as_employee_name_as_status_as_username_password_and_confirm_password(String userRole,String employeeName, String status) throws InterruptedException {
+    @When("the admin enters the userRole as {string}, employee name as {string}, status as {string}, username as {string},password as {string} and confirm password as {string}")
+    public void the_admin_enters_the_user_role_as_employee_name_as_status_as_username_as_password_as_and_confirm_password_as(String userRole,String employeeName, String status, String userName, String password, String confirmPassword) throws InterruptedException {
         click(createEmployeeLoginPage.userRole);
-        click(createEmployeeLoginPage.essUserOption);
+        selectDropdownOptionByText(createEmployeeLoginPage.userRoleOptions,userRole);
 
-        sendText(employeeName, createEmployeeLoginPage.employeeName);
-        click(createEmployeeLoginPage.employeeNameOption,true);
+        if(!employeeName.isBlank()){
+            sendText(employeeName, createEmployeeLoginPage.employeeName);
+            click(createEmployeeLoginPage.employeeNameOption,true);
+        }
 
         click(createEmployeeLoginPage.status);
-        click(createEmployeeLoginPage.enabledStatusOption);
+        selectDropdownOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
 
-        sendText(employeeName+"User" + generateRandomNumber(), createEmployeeLoginPage.userName);
+        if(!userName.isBlank()) {
+            sendText(userName + generateRandomNumber(), createEmployeeLoginPage.userName);
+        }
 
-        sendText("Testpass@123", createEmployeeLoginPage.password);
-        sendText("Testpass@123", createEmployeeLoginPage.confirmPassword);
-
-        Thread.sleep(3000);
-
+        sendText(password, createEmployeeLoginPage.password);
+        sendText(confirmPassword, createEmployeeLoginPage.confirmPassword);
     }
+
     @When("user clicks save button")
     public void user_clicks_save_button() {
         click(createEmployeeLoginPage.saveButton);
@@ -54,4 +58,31 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         System.out.println(viewSystemUsersUrl);
         Assert.assertTrue(driver.getCurrentUrl().contains(viewSystemUsersUrl));
     }
+
+    @Then("the error message {string} is shown beside {string} field")
+    public void the_error_message_is_shown_beside_field(String message, String fieldName) {
+        WebElement element = null;
+        switch(fieldName) {
+            case "user role":element=createEmployeeLoginPage.userRoleErrorLoc;break;
+            case "status":element=createEmployeeLoginPage.statusErrorLoc;break;
+            case "employee name":element=createEmployeeLoginPage.employeeNameErrorLoc;break;
+            case "user name":element=createEmployeeLoginPage.userNameErrorLoc;break;
+            case "password":element=createEmployeeLoginPage.passwordErrorLoc;break;
+            case "confirm password":element=createEmployeeLoginPage.confirmPasswordErrorLoc;break;
+        }
+        Assert.assertTrue(element.isDisplayed());
+        Assert.assertEquals(message,element.getText());
+    }
+
+    @When("the user enters the  password as {string} and confirm password as {string}")
+    public void the_user_enters_the_password_as_and_confirm_password_as(String password, String confirmPassword) {
+        sendText(password, createEmployeeLoginPage.password);
+        sendText(confirmPassword, createEmployeeLoginPage.confirmPassword);
+    }
+
+    @When("the user enters the  password as {string}")
+    public void the_user_enters_the_password_as(String password) {
+        sendText(password, createEmployeeLoginPage.password);
+    }
+
 }
