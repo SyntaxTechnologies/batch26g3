@@ -8,13 +8,13 @@ Background:
   And  admin clicks the User management option
   And admin clicks the Add button
 
-  @create_employee_login @valid_employee_login
+  @create_employee_login @positive
   Scenario: creating employee login details
     When the admin enters the userRole as "ESS", employee name as "test", status as "Enabled", username as "testUser",password as "Testpass@123" and confirm password as "Testpass@123"
     And user clicks save button
     Then the user login details are created successfully
 
-  @create_employee_login @invalid1
+  @create_employee_login @negative
   Scenario Outline: Save fails when a required field is left empty
     When the admin enters the userRole as "<userRole>", employee name as "<employeeName>", status as "<status>", username as "<username>",password as "<password>" and confirm password as "<confirmPassword>"
     And user clicks save button
@@ -46,7 +46,7 @@ Background:
       | Passwordtest |Your password must contain minimum 1 number |
       | Passwordtest123 | Your password must contain minimum 1 special character  |
 
-  @create_employee_login  @negative1
+  @create_employee_login  @ui
   Scenario Outline: Testing password strength
     When the user enters the  password as "<password_text>"
     Then the error message "<strength>" is shown beside "password strength" field
