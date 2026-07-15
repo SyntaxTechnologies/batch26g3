@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty",
                 "html:target/cucumber.html",
                 "json:target/jsonReports/cucumber.json"}
+
 )
 public class Testrunner {
 }
