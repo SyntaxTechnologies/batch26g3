@@ -85,16 +85,12 @@ public class CommonMethods extends pageInitialiser{
     }
 
     public void waitForOptionReadyAndClickable(WebElement element) {
-        getwait().until(driver -> {
-            try {
-                String text = element.getText().trim();
-                boolean hasRealText = !text.isEmpty() && !text.toLowerCase().contains("searching");
-                boolean isClickable = element.isDisplayed() && element.isEnabled();
-                return hasRealText && isClickable;
-            } catch (Exception e) {
-                return false;
-            }
-        });
+        getwait().until(
+                ExpectedConditions.and(
+                        ExpectedConditions.elementToBeClickable(element),
+                        ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(element, "Searching..."))
+                )
+        );
     }
 
     public void waitForTextToBeExpectedTest(WebElement element,String expectedText){
@@ -105,9 +101,13 @@ public class CommonMethods extends pageInitialiser{
         getwait().until(ExpectedConditions.urlContains(url));
     }
 
-    // Generates random number between 1 and 100
+    public void waitForElementToBeVisible(WebElement element){
+        getwait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
+    }
+
+    // Generates random number between 1 and 1000
     public int generateRandomNumber() {
-        return (int) (Math.random() * 100) + 1;
+        return (int) (Math.random() * 1000) + 1;
     }
 
     public void selectDropdownOptionByText(List<WebElement> options, String optionToSelect)

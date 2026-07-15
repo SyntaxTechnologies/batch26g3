@@ -100,6 +100,9 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         sendText(createdUserName, createEmployeeLoginPage.visitUsername);
         click(createEmployeeLoginPage.searchButton);
 
+        waitForElementToBeVisible(createEmployeeLoginPage.foundUserName);
+        waitForElementToBeVisible(createEmployeeLoginPage.foundEmployeeName);
+
         Assert.assertEquals(createdUserName, createEmployeeLoginPage.foundUserName.getText());
         Assert.assertEquals(employeeName, createEmployeeLoginPage.foundEmployeeName.getText());
     }
