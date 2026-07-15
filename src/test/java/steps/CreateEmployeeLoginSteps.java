@@ -29,7 +29,7 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
     @When("the admin enters the userRole as {string}, employee name as {string}, status as {string}, username as {string},password as {string} and confirm password as {string}")
     public void the_admin_enters_the_user_role_as_employee_name_as_status_as_username_as_password_as_and_confirm_password_as(String userRole,String employeeName, String status, String userName, String password, String confirmPassword) throws InterruptedException {
         click(createEmployeeLoginPage.userRole);
-        selectDropdownOptionByText(createEmployeeLoginPage.userRoleOptions,userRole);
+        selectOptionByText(createEmployeeLoginPage.userRoleOptions,userRole);
 
         if(!employeeName.isBlank()){
             sendText(employeeName, createEmployeeLoginPage.employeeName);
@@ -37,7 +37,7 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         }
 
         click(createEmployeeLoginPage.status);
-        selectDropdownOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
+        selectOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
 
         createdUserName= userName + generateRandomNumber();
 

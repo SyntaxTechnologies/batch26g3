@@ -110,7 +110,7 @@ public class CommonMethods extends pageInitialiser{
         return (int) (Math.random() * 1000) + 1;
     }
 
-    public void selectDropdownOptionByText(List<WebElement> options, String optionToSelect)
+    public void selectOptionByText(List<WebElement> options, String optionToSelect)
     {
         List<WebElement> elements = options;
         for(var element : elements){
