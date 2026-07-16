@@ -78,7 +78,7 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         Assert.assertTrue(element.isDisplayed());
 
         if(fieldName.equals("password strength")){
-            waitForTextToBeExpectedTest(element,message);
+            waitForTextToBe(element,message);
         }
 
         Assert.assertEquals(message,element.getText());

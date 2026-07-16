@@ -9,7 +9,7 @@ public class pageInitialiser {
     public static AddEmployeePage addEmployeePage;
     public static EditContactDetailsPage editContactDetailsPage;
     public static EmployeeSearchPage employeeSearchPage;
-    public static UserEditPersonalDetailsPage userEditPersonalDetailsPage;
+    public static EditPersonalDetailsPage editPersonalDetailsPage;
 
     public static void initilizePageObjects() {
         loginPage = new LoginPage();
@@ -17,6 +17,6 @@ public class pageInitialiser {
         editContactDetailsPage=new EditContactDetailsPage();
         employeeSearchPage = new EmployeeSearchPage();
         createEmployeeLoginPage = new CreateEmployeeLoginPage();
-        userEditPersonalDetailsPage = new UserEditPersonalDetailsPage();
+        editPersonalDetailsPage = new EditPersonalDetailsPage();
     }
 }

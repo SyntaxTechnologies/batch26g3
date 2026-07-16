@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -7,7 +8,10 @@ import utils.CommonMethods;
 
 import java.util.List;
 
-public class UserEditPersonalDetailsPage extends CommonMethods {
+public class EditPersonalDetailsPage extends CommonMethods {
+
+    @FindBy(xpath = "//label[text()='Employee Id']/ancestor::div[contains(@class,'oxd-input-group')]//input")
+    public WebElement id;
 
     @FindBy(xpath = "//input[@name='firstName']")
     public WebElement firstName;
@@ -18,8 +22,11 @@ public class UserEditPersonalDetailsPage extends CommonMethods {
     @FindBy(xpath = "//input[@name='lastName']")
     public WebElement lastName;
 
-    @FindBy(xpath = "//input[@type='radio']")
-    public List<WebElement> genders;
+    @FindBy(xpath = "//div[contains(@class,'oxd-radio-wrapper')]//label")
+    public List<WebElement> genderLabels;
+
+    @FindBy(xpath = "//div[contains(@class,'oxd-radio-wrapper')]//input[@type='radio']")
+    public List<WebElement> genderInputs;
 
     @FindBy(xpath = "//label[text()='Nationality']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
     public WebElement nationality;
@@ -34,7 +41,7 @@ public class UserEditPersonalDetailsPage extends CommonMethods {
     public List<WebElement> maritalStatusOptions;
 
     @FindBy(xpath = "//button[text()=' Save ']")
-    public List<WebElement> saveButton;
+    public WebElement saveButton;
 
     @FindBy(xpath = "//a/span[text()='My Info']")
     public WebElement myInfoButton;
@@ -42,9 +49,21 @@ public class UserEditPersonalDetailsPage extends CommonMethods {
     @FindBy(xpath = "//a[text()='Personal Details']")
     public WebElement personalDetailsButton;
 
-    public void getByValue(String valueToBeSelected)
-    {
+   public WebElement getGenderElement(String gender)
+   {
+      return  driver.findElement(By.xpath("//label[text()='"+gender+"']"));
+   }
 
+   public WebElement getMartialStatusElement(String statusToBeSelected)
+   {
+       click(maritalStatus);
+       return driver.findElement(By.xpath("//div[@role='option']/span[text()='"+statusToBeSelected+"']"));
+   }
+
+    public WebElement getNationalityElement(String nationalityToBeSelected)
+    {
+        click(nationality);
+        return driver.findElement(By.xpath("//div[@role='option']/span[text()='"+nationalityToBeSelected+"']"));
     }
 
     public WebElement getLocator(String fieldName)
@@ -61,7 +80,7 @@ public class UserEditPersonalDetailsPage extends CommonMethods {
         return null;
     }
 
-    public  UserEditPersonalDetailsPage() {
+    public EditPersonalDetailsPage() {
         PageFactory.initElements(driver,this);
     }
 }

@@ -1,10 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -59,6 +56,13 @@ public class CommonMethods extends pageInitialiser{
         element.sendKeys(text);
     }
 
+    public void clearAndSendText(String text, WebElement element) {
+        element.click();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+
     public WebDriverWait getwait(){
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(Constants.Explicit_Wait));
         return  wait;
@@ -93,7 +97,7 @@ public class CommonMethods extends pageInitialiser{
         );
     }
 
-    public void waitForTextToBeExpectedTest(WebElement element,String expectedText){
+    public void waitForTextToBe(WebElement element, String expectedText){
         getwait().until(driver -> element.getText().trim().equalsIgnoreCase(expectedText));
     }
 
