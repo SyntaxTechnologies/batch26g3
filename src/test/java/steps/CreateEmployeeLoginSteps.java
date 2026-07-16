@@ -31,7 +31,6 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
                                                                                                                              String status, String userName,
                                                                                                                              String password, String confirmPassword)
     {
-        //click(createEmployeeLoginPage.openDropdownAndGetOption(createEmployeeLoginPage.userRole,userRole.trim()));
         click(createEmployeeLoginPage.userRole);
         selectOptionByText(createEmployeeLoginPage.userRoleOptions,userRole);
 
@@ -40,13 +39,11 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
             click(createEmployeeLoginPage.employeeNameOption,true);
         }
 
-        //click(createEmployeeLoginPage.openDropdownAndGetOption(createEmployeeLoginPage.status,status.trim()));
         click(createEmployeeLoginPage.status);
         selectOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
 
-
         if(!userName.isBlank()) {
-            enterUniqueUsername(userName.trim());
+            getUniqueUsername(userName.trim());
         }
 
         sendText(password.trim(), createEmployeeLoginPage.password);
@@ -111,7 +108,7 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         Assert.assertEquals(employeeName, createEmployeeLoginPage.foundEmployeeName.getText());
     }
 
-    public void enterUniqueUsername(String baseUsername) {
+    public void getUniqueUsername(String baseUsername) {
         int maxAttempts = 5;
 
         for (int attempt = 1; attempt <= maxAttempts; attempt++) {
