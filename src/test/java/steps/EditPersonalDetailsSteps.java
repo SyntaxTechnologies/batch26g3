@@ -8,6 +8,7 @@ import utils.CommonMethods;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class EditPersonalDetailsSteps extends CommonMethods {
    static Map<String,String> updatedData;
@@ -38,7 +39,7 @@ public class EditPersonalDetailsSteps extends CommonMethods {
             String field=data.get(i);
             if(!field.equalsIgnoreCase("gender"))
             {
-                WebElement element= editPersonalDetailsPage.getLocator(field);
+                WebElement element= editPersonalDetailsPage.getElementByFieldName(field);
                 Assert.assertNotNull("No locator found for field: " + field, element);
                 Assert.assertTrue(field + " is not displayed", element.isDisplayed());
                 Assert.assertTrue(field + " is not enabled", element.isEnabled());
@@ -66,11 +67,11 @@ public class EditPersonalDetailsSteps extends CommonMethods {
 
         clearAndSendText(updatedData.get("lastName"), editPersonalDetailsPage.lastName);
 
-        click(editPersonalDetailsPage.getNationalityElement(updatedData.get("nationality").trim()));
+        click(editPersonalDetailsPage.openDropdownAndGetOption(editPersonalDetailsPage.nationality,updatedData.get("nationality").trim()));
 
-        click(editPersonalDetailsPage.getMartialStatusElement(updatedData.get("maritalStatus").trim()));
+        click(editPersonalDetailsPage.openDropdownAndGetOption(editPersonalDetailsPage.maritalStatus, updatedData.get("maritalStatus").trim()));
 
-        click(editPersonalDetailsPage.getGenderElement(updatedData.get("gender").trim()));
+        click(editPersonalDetailsPage.getGenderLabelElement(updatedData.get("gender").trim()));
 
         id = editPersonalDetailsPage.id.getAttribute("value");
     }
@@ -87,9 +88,14 @@ public class EditPersonalDetailsSteps extends CommonMethods {
         waitForValueToBePopulated( editPersonalDetailsPage.firstName);
         Assert.assertEquals(updatedData.get("firstName"), editPersonalDetailsPage.firstName.getAttribute("value"));
 
-        waitForValueToBePopulated( editPersonalDetailsPage.middleName);
-        Assert.assertEquals(updatedData.get("middleName"), editPersonalDetailsPage.middleName.getAttribute("value"));
+        String expectedMiddleName = updatedData.get("middleName");
+        if(expectedMiddleName != null && !expectedMiddleName.isBlank()) {
+            waitForValueToBePopulated(editPersonalDetailsPage.middleName);
+        }
 
+        String actualMiddleName = editPersonalDetailsPage.middleName.getAttribute("value");
+        Assert.assertEquals(updatedData.get("middleName"), Objects.equals(actualMiddleName, "") ?null:actualMiddleName);
+      
         waitForValueToBePopulated( editPersonalDetailsPage.lastName);
         Assert.assertEquals(updatedData.get("lastName"), editPersonalDetailsPage.lastName.getAttribute("value"));
 

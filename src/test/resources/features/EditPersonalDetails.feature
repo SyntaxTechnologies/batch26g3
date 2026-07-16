@@ -17,12 +17,12 @@ Scenario: Verify all fields for updating personal contact details are displayed 
     | maritalStatus |
     | gender        |
 
-  @edit-personal-details1
+  @edit-personal-details
    Scenario: Updating the personal information is successful
     When the user updates the personal details with the following data
-      | firstName     |Bin|
+      | firstName     |Bindu|
       | middleName    |ms|
-      | lastName      |JA|
+      | lastName      |Jana|
       | nationality   |Canadian|
       | maritalStatus |Married|
       | gender        |Female|

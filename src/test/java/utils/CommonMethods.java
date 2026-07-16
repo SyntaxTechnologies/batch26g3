@@ -60,7 +60,9 @@ public class CommonMethods extends pageInitialiser{
         element.click();
         element.sendKeys(Keys.CONTROL + "a");
         element.sendKeys(Keys.DELETE);
-        element.sendKeys(text);
+        if(text!=null && !text.isBlank()){
+            element.sendKeys(text);
+        }
     }
 
     public WebDriverWait getwait(){
@@ -111,11 +113,6 @@ public class CommonMethods extends pageInitialiser{
 
     public void waitForValueToBePopulated(WebElement element) {
         getwait().until(ExpectedConditions.attributeToBeNotEmpty(element, "value"));
-    }
-
-    public void waitForSelectionStateToBe(WebElement element,boolean isSelected)
-    {
-        getwait().until(ExpectedConditions.elementSelectionStateToBe(element, isSelected));
     }
 
     // Generates random number between 1 and 1000

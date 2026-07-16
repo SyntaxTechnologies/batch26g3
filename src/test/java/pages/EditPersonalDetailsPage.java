@@ -43,7 +43,7 @@ public class EditPersonalDetailsPage extends CommonMethods {
     @FindBy(xpath = "//a[text()='Personal Details']")
     public WebElement personalDetailsButton;
 
-   public WebElement getGenderElement(String gender)
+   public WebElement getGenderLabelElement(String gender)
    {
       return  driver.findElement(By.xpath("//label[text()='"+gender+"']"));
    }
@@ -55,19 +55,12 @@ public class EditPersonalDetailsPage extends CommonMethods {
         ));
     }
 
-   public WebElement getMartialStatusElement(String statusToBeSelected)
-   {
-       click(maritalStatus);
-       return driver.findElement(By.xpath("//div[@role='option']/span[text()='"+statusToBeSelected+"']"));
-   }
-
-    public WebElement getNationalityElement(String nationalityToBeSelected)
-    {
-        click(nationality);
-        return driver.findElement(By.xpath("//div[@role='option']/span[text()='"+nationalityToBeSelected+"']"));
+    public WebElement openDropdownAndGetOption(WebElement dropdownField, String optionToSelect) {
+        click(dropdownField);
+        return driver.findElement(By.xpath("//div[@role='option']/span[text()='" + optionToSelect + "']"));
     }
 
-    public WebElement getLocator(String fieldName)
+    public WebElement getElementByFieldName(String fieldName)
     {
         switch(fieldName)
         {
