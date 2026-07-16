@@ -31,14 +31,8 @@ public class EditPersonalDetailsPage extends CommonMethods {
     @FindBy(xpath = "//label[text()='Nationality']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
     public WebElement nationality;
 
-    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']")
-    public List<WebElement> nationalityOptions;
-
     @FindBy(xpath = "//label[text()='Marital Status']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
     public WebElement maritalStatus;
-
-    @FindBy(xpath = "//div[@role='listbox']//div[@role='option']")
-    public List<WebElement> maritalStatusOptions;
 
     @FindBy(xpath = "//button[text()=' Save ']")
     public WebElement saveButton;
@@ -53,6 +47,13 @@ public class EditPersonalDetailsPage extends CommonMethods {
    {
       return  driver.findElement(By.xpath("//label[text()='"+gender+"']"));
    }
+
+    public WebElement getGenderInputElement(String gender) {
+        String value = gender.equalsIgnoreCase("Male") ? "1" : "2";
+        return driver.findElement(By.xpath(
+                "//div[contains(@class,'oxd-radio-wrapper')]//input[@type='radio' and @value='" + value + "']"
+        ));
+    }
 
    public WebElement getMartialStatusElement(String statusToBeSelected)
    {

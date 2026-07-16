@@ -109,6 +109,15 @@ public class CommonMethods extends pageInitialiser{
         getwait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
+    public void waitForValueToBePopulated(WebElement element) {
+        getwait().until(ExpectedConditions.attributeToBeNotEmpty(element, "value"));
+    }
+
+    public void waitForSelectionStateToBe(WebElement element,boolean isSelected)
+    {
+        getwait().until(ExpectedConditions.elementSelectionStateToBe(element, isSelected));
+    }
+
     // Generates random number between 1 and 1000
     public int generateRandomNumber() {
         return (int) (Math.random() * 1000) + 1;

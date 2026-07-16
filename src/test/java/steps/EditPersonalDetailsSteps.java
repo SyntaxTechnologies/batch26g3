@@ -3,7 +3,6 @@ package steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
 
@@ -85,22 +84,24 @@ public class EditPersonalDetailsSteps extends CommonMethods {
     public void the_updated_values_are_reflected_in_the_fields_after_a_page_refresh() {
        driver.navigate().refresh();
 
-        System.out.println("value"+ editPersonalDetailsPage.firstName.getAttribute("value"));
-        System.out.println(updatedData.get("firstName"));
-       Assert.assertEquals(updatedData.get("firstName"), editPersonalDetailsPage.firstName.getAttribute("value"));
-       Assert.assertEquals(updatedData.get("middleName"), editPersonalDetailsPage.middleName.getAttribute("value"));
-       Assert.assertEquals(updatedData.get("lastName"), editPersonalDetailsPage.lastName.getAttribute("value"));
+        waitForValueToBePopulated( editPersonalDetailsPage.firstName);
+        Assert.assertEquals(updatedData.get("firstName"), editPersonalDetailsPage.firstName.getAttribute("value"));
 
-//        Assert.assertEquals(updatedData.get("nationality"),userEditPersonalDetailsPage.firstName.getAttribute("value"));
-//        Assert.assertEquals(updatedData.get("maritalStatus"),userEditPersonalDetailsPage.firstName.getAttribute("value"));
-//        Assert.assertEquals(updatedData.get("gender"),userEditPersonalDetailsPage.firstName.getAttribute("value"));
+        waitForValueToBePopulated( editPersonalDetailsPage.middleName);
+        Assert.assertEquals(updatedData.get("middleName"), editPersonalDetailsPage.middleName.getAttribute("value"));
 
+        waitForValueToBePopulated( editPersonalDetailsPage.lastName);
+        Assert.assertEquals(updatedData.get("lastName"), editPersonalDetailsPage.lastName.getAttribute("value"));
+
+        Assert.assertEquals(updatedData.get("nationality"),editPersonalDetailsPage.nationality.getText());
+
+        Assert.assertEquals(updatedData.get("maritalStatus"),editPersonalDetailsPage.maritalStatus.getText());
+
+        Assert.assertTrue(editPersonalDetailsPage.getGenderInputElement(updatedData.get("gender")).isSelected());
     }
 
     @Then("the database reflects the updated personal details")
     public void the_database_reflects_the_updated_personal_details() {
         System.out.println("The database reflects the updated personal details");
     }
-
-
 }
