@@ -27,26 +27,30 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
     }
 
     @When("the admin enters the userRole as {string}, employee name as {string}, status as {string}, username as {string},password as {string} and confirm password as {string}")
-    public void the_admin_enters_the_user_role_as_employee_name_as_status_as_username_as_password_as_and_confirm_password_as(String userRole,String employeeName, String status, String userName, String password, String confirmPassword) throws InterruptedException {
+    public void the_admin_enters_the_user_role_as_employee_name_as_status_as_username_as_password_as_and_confirm_password_as(String userRole,String employeeName,
+                                                                                                                             String status, String userName,
+                                                                                                                             String password, String confirmPassword)
+    {
+        //click(createEmployeeLoginPage.openDropdownAndGetOption(createEmployeeLoginPage.userRole,userRole.trim()));
         click(createEmployeeLoginPage.userRole);
         selectOptionByText(createEmployeeLoginPage.userRoleOptions,userRole);
 
         if(!employeeName.isBlank()){
-            sendText(employeeName, createEmployeeLoginPage.employeeName);
+            sendText(employeeName.trim(), createEmployeeLoginPage.employeeName);
             click(createEmployeeLoginPage.employeeNameOption,true);
         }
 
+        //click(createEmployeeLoginPage.openDropdownAndGetOption(createEmployeeLoginPage.status,status.trim()));
         click(createEmployeeLoginPage.status);
         selectOptionByText(createEmployeeLoginPage.enabledStatusOptions,status);
 
-        createdUserName= userName + generateRandomNumber();
 
         if(!userName.isBlank()) {
-            sendText(createdUserName, createEmployeeLoginPage.userName);
+            enterUniqueUsername(userName.trim());
         }
 
-        sendText(password, createEmployeeLoginPage.password);
-        sendText(confirmPassword, createEmployeeLoginPage.confirmPassword);
+        sendText(password.trim(), createEmployeeLoginPage.password);
+        sendText(confirmPassword.trim(), createEmployeeLoginPage.confirmPassword);
     }
 
     @When("user clicks save button")
@@ -107,4 +111,42 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
         Assert.assertEquals(employeeName, createEmployeeLoginPage.foundEmployeeName.getText());
     }
 
+    public void enterUniqueUsername(String baseUsername) {
+        int maxAttempts = 5;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            String candidate = baseUsername + generateRandomNumber();
+
+            while (candidate.length() < 5) {
+                candidate += generateRandomNumber();
+            }
+
+            createdUserName = candidate;
+            clearAndSendText(createdUserName, createEmployeeLoginPage.userName);
+            createEmployeeLoginPage.password.click();
+
+            try {
+                Thread.sleep(800);
+            } catch (InterruptedException ignored) {}
+
+            boolean alreadyExists =isDisplayedQuick(createEmployeeLoginPage.userNameErrorLoc)
+                    && createEmployeeLoginPage.userNameErrorLoc.getText().contains("Already exists");
+
+            if (!alreadyExists) {
+                return;
+            }
+
+            System.out.println("Username '" + createdUserName + "' already exists, retrying (" + attempt + "/" + maxAttempts + ")");
+        }
+
+        Assert.fail("Could not find a unique username after " + maxAttempts + " attempts");
+    }
+
+    public boolean isDisplayedQuick(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

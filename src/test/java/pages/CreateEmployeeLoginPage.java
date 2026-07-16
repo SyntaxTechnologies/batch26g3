@@ -81,7 +81,7 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "//div[contains(@class,'oxd-table-body')]//div[contains(@class,'oxd-padding-cell')][4]")
     public WebElement foundEmployeeName;
 
-    public CreateEmployeeLoginPage() {
+     public CreateEmployeeLoginPage() {
         PageFactory.initElements(driver,this);
     }
 }
