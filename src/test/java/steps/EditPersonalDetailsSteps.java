@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
+import utils.DBReader;
 
 import java.util.List;
 import java.util.Map;
@@ -104,5 +105,29 @@ public class EditPersonalDetailsSteps extends CommonMethods {
         Assert.assertEquals(updatedData.get("maritalStatus"),editPersonalDetailsPage.maritalStatus.getText());
 
         Assert.assertTrue(editPersonalDetailsPage.getGenderInputElement(updatedData.get("gender")).isSelected());
+    }
+
+    @Then("verify the changes are updated in database")
+    public void verify_the_changes_are_updated_in_database() {
+        try {
+            String query = "select employee_id,emp_firstname,emp_lastname,emp_middle_name,emp_marital_status,emp_gender \n" +
+                    "from hs_hr_employee where employee_id="+id+";";
+
+        List<Map<String,String>> dataFromDb= DBReader.fetch(query);
+        var actualFirstName =  dataFromDb.get(0).get("emp_firstname");
+        var actualMiddleName =  dataFromDb.get(0).get("emp_middle_name");
+        var actualLastName =  dataFromDb.get(0).get("emp_lastname");
+        var actualMaritalStatus =  dataFromDb.get(0).get("emp_marital_status");
+        var actualGender =  dataFromDb.get(0).get("emp_gender");
+
+        Assert.assertEquals(updatedData.get("firstName"),actualFirstName);
+        Assert.assertEquals(updatedData.get("middleName"),actualMiddleName);
+        Assert.assertEquals(updatedData.get("lastName"),actualLastName);
+        Assert.assertEquals(updatedData.get("maritalStatus"),actualMaritalStatus);
+        Assert.assertEquals(updatedData.get("gender").equalsIgnoreCase("Male") ? "1" : "2",actualGender);
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+        }
     }
 }

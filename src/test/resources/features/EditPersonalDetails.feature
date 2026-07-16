@@ -20,14 +20,15 @@ Scenario: Verify all fields for updating personal contact details are displayed 
   @edit-personal-details
    Scenario: Updating the personal information is successful
     When the user updates the personal details with the following data
-      | firstName     |Bindu   |
-      | middleName    |ms      |
-      | lastName      |Jana    |
-      | nationality   |Canadian|
-      | maritalStatus |Married |
-      | gender        |Female  |
+      | firstName     |BinduJ   |
+      | middleName    |msJ      |
+      | lastName      |JanaJ    |
+      | nationality   |Greek    |
+      | maritalStatus |Other    |
+      | gender        |Female   |
     And user clicks the save button
     Then the updated values are reflected in the fields after a page refresh
+    And verify the changes are updated in database
 
   @edit-personal-details @optional_field
   Scenario: Updating personal information succeeds without middle name
