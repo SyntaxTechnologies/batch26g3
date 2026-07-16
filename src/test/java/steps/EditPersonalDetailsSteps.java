@@ -105,9 +105,4 @@ public class EditPersonalDetailsSteps extends CommonMethods {
 
         Assert.assertTrue(editPersonalDetailsPage.getGenderInputElement(updatedData.get("gender")).isSelected());
     }
-
-    @Then("the database reflects the updated personal details")
-    public void the_database_reflects_the_updated_personal_details() {
-        System.out.println("The database reflects the updated personal details");
-    }
 }
