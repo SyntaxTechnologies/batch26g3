@@ -21,8 +21,6 @@ public class DBReader {
 
           ResultSetMetaData rsmd = rs.getMetaData();
 
-
-
           while (rs.next()) { // for row by row
               Map<String, String> map = new LinkedHashMap<>();
               for (int i = 1; i <= rsmd.getColumnCount(); i++) { // for columns in row
