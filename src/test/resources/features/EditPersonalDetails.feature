@@ -28,6 +28,7 @@ Scenario: Verify all fields for updating personal contact details are displayed 
       | gender        |Female  |
     And user clicks the save button
     Then the updated values are reflected in the fields after a page refresh
+    And verify the changes are updated in database
 
   @edit-personal-details @optional_field
   Scenario: Updating personal information succeeds without middle name
