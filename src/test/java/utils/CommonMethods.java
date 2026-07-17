@@ -6,7 +6,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -23,26 +22,27 @@ public class CommonMethods extends pageInitialiser{
 
     public static WebDriver driver;
 
-    public void openBrowser(){
-        switch (ConfigReader.read("browser")){
+    public void openBrowser() {
+        switch (ConfigReader.read("browser")) {
             case "Chrome":
                 driver = new ChromeDriver();
                 break;
 
             case "Edge":
-                driver=new EdgeDriver();
+                driver = new EdgeDriver();
                 break;
 
             case "FireFox":
-                driver=new FirefoxDriver();
+                driver = new FirefoxDriver();
                 break;
             case "Safari":
-                driver=new SafariDriver();
+                driver = new SafariDriver();
                 break;
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        initilizePageObjects();
+        initializePageObjects();
+
     }
 
     public void closeBrowser() {
@@ -51,9 +51,20 @@ public class CommonMethods extends pageInitialiser{
         }
     }
 
-    public void sendText(String username, WebElement element){
-            element.clear();
-            element.sendKeys(username);
+    public void sendText(String text, WebElement element){
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    public void sendText(WebElement element){
+        element.clear();
+        element.sendKeys(ConfigReader.read("username"));
+
+    }
+
+    public void sendText(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(text);
     }
 
     public WebDriverWait getwait(){

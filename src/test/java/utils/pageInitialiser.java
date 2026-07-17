@@ -1,9 +1,6 @@
 package utils;
 
-import pages.AddEmployeePage;
-import pages.EditContactDetailsPage;
-import pages.EmployeeSearchPage;
-import pages.LoginPage;
+import pages.*;
 
 public class pageInitialiser {
 
@@ -11,13 +8,20 @@ public class pageInitialiser {
     public static AddEmployeePage addEmployeePage;
     public static EditContactDetailsPage editContactDetailsPage;
     public static EmployeeSearchPage employeeSearchPage;
+    public static addDependentsPage addDependentsPage;
+    public static profilePicUploadPage profilePicUploadPage;
 
-    public static void initilizePageObjects() {
+
+    public static void initializePageObjects() {
 
         loginPage = new LoginPage();
         addEmployeePage=new AddEmployeePage();
         editContactDetailsPage=new EditContactDetailsPage();
         employeeSearchPage = new EmployeeSearchPage();
+        addDependentsPage= new addDependentsPage();
+        profilePicUploadPage = new profilePicUploadPage();
+
+
     }
 
 
