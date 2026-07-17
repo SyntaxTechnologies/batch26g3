@@ -69,7 +69,7 @@ public class CreateEmployeeLoginPage extends CommonMethods {
     @FindBy(xpath = "//button[text()=' Save ']")
     public WebElement saveButton;
 
-    @FindBy(xpath = "//label[text()='Username']//ancestor::div[contains(@class,'oxd-input-group')]//input")
+    @FindBy(xpath = "//label[text()='Username']/ancestor::div[contains(@class,'oxd-input-group')]//input")
     public WebElement visitUsername;
 
     @FindBy(xpath = "//button[text()=' Search ']")

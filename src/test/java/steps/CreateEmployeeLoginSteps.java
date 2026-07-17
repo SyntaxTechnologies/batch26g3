@@ -97,7 +97,8 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
     }
 
     @Then("the created user is linked to employee {string}")
-    public void the_created_user_is_linked_to_employee(String employeeName) throws InterruptedException {
+    public void the_created_user_is_linked_to_employee(String employeeName) {
+        click(createEmployeeLoginPage.visitUsername);
         sendText(createdUserName, createEmployeeLoginPage.visitUsername);
         click(createEmployeeLoginPage.searchButton);
 
