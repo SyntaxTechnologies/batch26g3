@@ -22,14 +22,19 @@ public class CommonMethods extends pageInitialiser{
     public static WebDriver driver;
 
     public void openBrowser(){
+        boolean headless = "true".equalsIgnoreCase(ConfigReader.read("headless"));
+
         switch (ConfigReader.read("browser")){
             case "Chrome":
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--window-size=1920,1080");
-                options.addArguments("--disable-gpu");
+                if(headless) {
+
+                    options.addArguments("--headless");
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-dev-shm-usage");
+                    options.addArguments("--window-size=1920,1080");
+                    options.addArguments("--disable-gpu");
+                }
                 driver = new ChromeDriver(options);
                 break;
 
@@ -45,7 +50,11 @@ public class CommonMethods extends pageInitialiser{
                 driver=new SafariDriver();
                 break;
         }
-        driver.manage().window().maximize();
+
+        if (!headless) {
+            driver.manage().window().maximize();
+        }
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.get(ConfigReader.read("url"));
 
