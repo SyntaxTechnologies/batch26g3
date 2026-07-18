@@ -98,6 +98,11 @@ public class CreateEmployeeLoginSteps extends CommonMethods {
 
     @Then("the created user is linked to employee {string}")
     public void the_created_user_is_linked_to_employee(String employeeName) {
+        System.out.println("=== DEBUG INFO ===");
+        System.out.println("Current URL: " + driver.getCurrentUrl());
+        System.out.println("Page title: " + driver.getTitle());
+        System.out.println("Page source snippet: " + driver.getPageSource().substring(0, Math.min(2000, driver.getPageSource().length())));
+        System.out.println("==================");
         waitForElementToBeVisible(createEmployeeLoginPage.visitUsername);
         click(createEmployeeLoginPage.visitUsername);
         sendText(createdUserName, createEmployeeLoginPage.visitUsername);
