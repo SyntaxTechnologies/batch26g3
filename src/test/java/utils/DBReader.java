@@ -9,9 +9,9 @@ import java.util.Map;
 public class DBReader {
 
     public static List<Map<String,String>> fetch(String query) throws SQLException {
-        String dbUrl="jdbc:mysql://148.72.132.33:3307/syntax_hrm";
-        String username="syntax_std";
-        String password="syntax_std@2026";
+        String dbUrl=ConfigReader.read("dbURL");
+        String username=ConfigReader.read("dbUsername");
+        String password=ConfigReader.read("dbPassword");
 
         List<Map<String, String>> data = new ArrayList<>();
 
