@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
 import utils.ConfigReader;
 
@@ -58,40 +59,45 @@ public class LoginSteps extends CommonMethods {
         sendText(ConfigReader.read("userName"), loginPage.usernameloc);
         sendText(ConfigReader.read("password"), loginPage.passwordloc);
     }
-
-    @When("user enters valid username and empty password")
-    public void user_enters_valid_username_and_empty_password() {
-        sendText(ConfigReader.read("userName"), loginPage.usernameloc);
-
-    }
-
-    @Then("the system shows {string} for the password field")
-    public void the_system_shows_for_the_password_field(String expectedText) {
-        String actualText = loginPage.requiredText.getText();
-        Assert.assertEquals(expectedText, actualText);
-    }
-
     @When("user leave username empty and valid password")
     public void user_leave_username_empty_and_valid_password() {
         sendText(ConfigReader.read("password"), loginPage.passwordloc);
     }
 
 
-    @Then("the system shows {string} for the username field")
-    public void the_system_shows_for_the_username_field(String expectedText) {
-        String actualText = loginPage.requiredText.getText();
-        Assert.assertEquals(expectedText, actualText);
-    }
-
-    @When("user leave username and password empty")
-    public void user_leave_username_and_password_empty() {
+    @When("user enters {string} and {string}")
+    public void user_enters_and(String username, String password) {
+        sendText(username, loginPage.usernameloc);
+        sendText(password, loginPage.passwordloc);
 
     }
+    @Then("the system shows {string} for the {string} field")
+    public void the_system_shows_for_the_field(String expectedText, String field) {
 
-    @Then("The system shows {string} in both username and password field")
-    public void the_system_shows_in_both_username_and_password_field(String expected ) {
-       Assert.assertEquals(expected, loginPage.requiredText.getText());
-       Assert.assertEquals(expected, loginPage.requiredText.getText());
+        WebElement element;
+        switch (field) {
+            case "username":
+                element = loginPage.usernameRequiredText;
+                break;
+
+            case "password":
+                element = loginPage.passwordRequiredText;
+                break;
+
+            case "both":
+                Assert.assertEquals(expectedText, loginPage.usernameRequiredText.getText());
+                Assert.assertEquals(expectedText, loginPage.passwordRequiredText.getText());
+
+            default:
+                throw new IllegalArgumentException("Invalid field: " + field);
+        }
+
+        Assert.assertEquals(expectedText, element.getText());
 
     }
+
+
+
+
+
 }
