@@ -87,6 +87,7 @@ public class LoginSteps extends CommonMethods {
             case "both":
                 Assert.assertEquals(expectedText, loginPage.usernameRequiredText.getText());
                 Assert.assertEquals(expectedText, loginPage.passwordRequiredText.getText());
+                return;
 
             default:
                 throw new IllegalArgumentException("Invalid field: " + field);
@@ -95,9 +96,5 @@ public class LoginSteps extends CommonMethods {
         Assert.assertEquals(expectedText, element.getText());
 
     }
-
-
-
-
 
 }
