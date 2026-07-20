@@ -4,6 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import utils.CommonMethods;
+import utils.Constants;
 
 import java.io.File;
 
@@ -21,13 +22,12 @@ public class profilePicUploadSteps extends CommonMethods {
 
     @When("the user selects a valid profile picture file to upload")
     public void the_user_selects_a_valid_profile_picture_file_to_upload() {
-        // 1. Get the dynamic absolute path of your test image
-        String filePath = new File("/Users/theela/IdeaProjects/batch26g3/src/test/resources/testData/sample.jpeg").getAbsolutePath();
 
-        // 2. DO NOT click the add button.
-        // Instead, send the path directly to the input element using vanilla .sendKeys()
+        String filePath = new File(Constants.PROFILE_PHOTO).getAbsolutePath();
+
         profilePicUploadPage.profilePictureAddButton.sendKeys(filePath);
     }
+
 
     @When("the user clicks the upload save button")
     public void the_user_clicks_the_upload_save_button() {
@@ -45,12 +45,11 @@ public class profilePicUploadSteps extends CommonMethods {
     @When("the user selects an invalid file format to upload")
     public void the_user_selects_an_invalid_file_format_to_upload() {
 
-    // Get absolute path of an invalid format file (e.g., test.txt or pdf) from project files
-        String invalidFilePath = new File("/Users/theela/IdeaProjects/batch26g3/src/test/resources/testData/invalidFile.txt").getAbsolutePath();
+        String invalidFilePath = new File(Constants.INVALID_FILE).getAbsolutePath();
 
-        // Send the path directly to the hidden file input
         profilePicUploadPage.profilePictureAddButton.sendKeys(invalidFilePath);
     }
+
     @Then("the system should display an error message regarding file format")
     public void the_system_should_display_an_error_message_regarding_file_format() {
 

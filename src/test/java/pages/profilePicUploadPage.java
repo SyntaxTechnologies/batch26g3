@@ -20,8 +20,6 @@ public class profilePicUploadPage extends CommonMethods {
     @FindBy(xpath="//input[@type='file']")
     public WebElement profilePictureAddButton;
 
-
-
     @FindBy(xpath = "//input[@type='file']")
     public WebElement fileInput;
 
