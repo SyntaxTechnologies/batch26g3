@@ -18,20 +18,13 @@ Feature: Login Related Functionality
     And user clicks on login button
     Then user is able to logged in successfully.
 
-   @emptyP
-   Scenario: Valid username and empty password
-     When user enters valid username and empty password
-     And user clicks on login button
-     Then the system shows "Required" for the password field
-
-   @emptyU
-   Scenario: Empty username and valid password
-     When user leave username empty and valid password
-     And user clicks on login button
-     Then the system shows "Required" for the username field
-
-   @empty
-   Scenario: Empty username and empty password
-     When user leave username and password empty
-     And user clicks on login button
-     Then The system shows "Required" in both username and password field
+  @validation
+  Scenario Outline: Login with missing required fields
+    When user enters "<username>" and "<password>"
+    And user clicks on login button
+    Then the system shows "Required" for the "<field>" field
+    Examples:
+      |username |password|field|
+      |admin    |        |password|
+      |         |admin123|username|
+      |         |        |both    |

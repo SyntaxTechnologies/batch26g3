@@ -9,5 +9,8 @@
         <module name="groupProjectB26" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="batch26g3" target="25" />
+    </bytecodeTargetLevel>
   </component>
 </project>

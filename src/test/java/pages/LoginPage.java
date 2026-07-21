@@ -26,5 +26,8 @@ public class LoginPage extends CommonMethods {
     public WebElement errorPasswordText;
 
     @FindBy(xpath="//span[text()='Required']")
-    public WebElement requiredText;
+    public WebElement usernameRequiredText;
+
+    @FindBy(xpath="//span[text()='Required']")
+    public WebElement passwordRequiredText;
 }
