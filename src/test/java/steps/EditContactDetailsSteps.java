@@ -6,12 +6,17 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonMethods;
 import utils.ConfigReader;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditContactDetailsSteps extends CommonMethods {
@@ -80,16 +85,30 @@ public class EditContactDetailsSteps extends CommonMethods {
     }
     @When("the employee updates the contact details with:")
     public void the_employee_updates_the_contact_details_with(io.cucumber.datatable.DataTable dataTable) {
-        Map<String,String> contactDetails=dataTable.asMap();
+        Map<String, String> contactDetails =
+                new HashMap<>(dataTable.asMap(String.class, String.class));
+
+        String uniqueEmail =
+                "user" + System.currentTimeMillis() + "@gmail.com";
+
+        contactDetails.put("Other Email", uniqueEmail);
+
         editContactDetailsPage.fillContactDetails(contactDetails);
 
     }
     @When("the employee clicks the Save button")
-    public void the_employee_clicks_the_save_button() {
+    public void the_employee_clicks_the_save_button() throws InterruptedException {
         otherEmailTxt=editContactDetailsPage.otherEmailField.getAttribute("value");
         System.out.println(otherEmailTxt);
         editContactDetailsPage.saveBtn.click();
-    }
+        Thread.sleep(6000);
+        /*JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", editContactDetailsPage.saveBtn);*/
+
+
+
+        }
+
     @When("the employee refreshes the page")
     public void the_employee_refreshes_the_page() {
         driver.navigate().refresh();
